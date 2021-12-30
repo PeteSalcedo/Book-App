@@ -135,7 +135,7 @@ class Book {
 
 //best sellers display
 
-const myapikey = 
+const myapikey = ''
 
 const api_url = `https://api.nytimes.com/svc/books/v3/lists/current/hardcover-fiction.json?api-key=${myapikey}`;
  
@@ -148,10 +148,13 @@ async function getapi(url) {
     // Storing data in form of JSON
     var data = await response.json();
     if (data !== ''){
-      console.log(data.results.books.forEach(bestseller => console.log(bestseller)))
-      const book = new Book(data.results.books[0].title, data.results.books[0].author, data.results.books[0].isbns[0].isbn10);
-
+      for (let i = 0; i < data.results.books.length; i++) {
+        console.log(data.results.books[i].title)
+       //console.log(data.results.books[0].title) 
+      const book = new Book(data.results.books[i].title, data.results.books[i].author, data.results.books[i].isbns[0].isbn10);
       UI.addBookToList(book);
+      }
+    
     }
 }
 // Calling that async function
