@@ -55,23 +55,6 @@ class Book {
     }
   }
 
-const myapikey = ''
-
-const api_url = `https://api.nytimes.com/svc/books/v3/lists/current/hardcover-fiction.json?api-key=${myapikey}`;
- 
-// Defining async function
-async function getapi(url) {
-    
-    // Storing response
-    const response = await fetch(url);
-    
-    // Storing data in form of JSON
-    var data = await response.json();
-    console.log(data);
-}
-// Calling that async function
-getapi(api_url);
-
 // Store Class: Handles Storage
   class Store {
     static getBooks() {
@@ -149,3 +132,30 @@ getapi(api_url);
     // Show success message
     UI.showAlert('Book Removed', 'success');
   });
+
+//best sellers display
+
+const myapikey = 
+
+const api_url = `https://api.nytimes.com/svc/books/v3/lists/current/hardcover-fiction.json?api-key=${myapikey}`;
+ 
+// Defining async function
+async function getapi(url) {
+    
+    // Storing response
+    const response = await fetch(url);
+    
+    // Storing data in form of JSON
+    var data = await response.json();
+    if (data !== ''){
+      console.log(data.results.books.forEach(bestseller => console.log(bestseller)))
+      const book = new Book(data.results.books[0].title, data.results.books[0].author, data.results.books[0].isbns[0].isbn10);
+
+      UI.addBookToList(book);
+    }
+}
+// Calling that async function
+getapi(api_url);
+
+
+
