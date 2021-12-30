@@ -7,7 +7,7 @@ class Book {
     }
   }
 
-  
+
   class UI {
     static displayBooks() {
       const books = Store.getBooks();
@@ -54,8 +54,25 @@ class Book {
       document.querySelector('#isbn').value = '';
     }
   }
-  
-  // Store Class: Handles Storage
+
+const myapikey = ''
+
+const api_url = `https://api.nytimes.com/svc/books/v3/lists/current/hardcover-fiction.json?api-key=${myapikey}`;
+ 
+// Defining async function
+async function getapi(url) {
+    
+    // Storing response
+    const response = await fetch(url);
+    
+    // Storing data in form of JSON
+    var data = await response.json();
+    console.log(data);
+}
+// Calling that async function
+getapi(api_url);
+
+// Store Class: Handles Storage
   class Store {
     static getBooks() {
       let books;
